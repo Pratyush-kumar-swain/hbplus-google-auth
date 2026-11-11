@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function allowedUser() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.matches('.*@hbplus[.]fit$');
+    }
+    match /users/{uid} {
+      allow read: if allowedUser() && request.auth.uid == uid;
+      // new users can only ever create themselves as "user"; admins are promoted in the console
+      allow create: if allowedUser() && request.auth.uid == uid && request.resource.data.role == 'user';
+      allow update: if allowedUser() && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role;
+    }
+  }
+}

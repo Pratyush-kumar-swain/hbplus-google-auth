@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "HB+ Portal",
+    "slug": "hbplus-auth",
+    "scheme": "hbplus",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "fit.hbplus.portal"
+    },
+    "android": {
+      "package": "fit.hbplus.portal"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-asset",
+      "expo-font"
+    ]
+  }
+}
